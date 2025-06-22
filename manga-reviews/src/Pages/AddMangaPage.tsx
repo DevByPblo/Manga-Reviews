@@ -37,7 +37,7 @@ const AddMangaPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen ">
       <Navbar />
       <main className="max-w-3xl mx-auto px-4 py-12">
         <div className="bg-white shadow-lg rounded-lg p-8">

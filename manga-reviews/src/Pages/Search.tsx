@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
+
 
 import Navbar from '../components/Navbar';
 import MangaCard from '../components/MangaCard';
 import { useManga } from '../context/MangaContext';
 
 const SearchPage: React.FC = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialQuery = queryParams.get('q') || '';
@@ -43,18 +45,22 @@ const SearchPage: React.FC = () => {
     }
   };
 
+  const openMangasPage = (mangaId: string | number): void => {
+    navigate(`/manga/${mangaId}`)
+  }
+
   const handleImport = (manga: any) => {
     importOnlineManga(manga);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen ">
       <Navbar />
       <main className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-6 border-b-2 border-manga-red pb-2">Search Manga</h1>
 
         {/* Tabs */}
-        <div className="flex mb-8">
+        <div className="flex mb-8 gap-2">
           <button
             onClick={() => setTab('local')}
             className={`flex-1 py-2 text-center ${tab === 'local' ? 'border-b-2 border-manga-red font-semibold' : 'text-gray-600'}`}
@@ -121,7 +127,7 @@ const SearchPage: React.FC = () => {
             ) : onlineResults.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {onlineResults.map(manga => (
-                  <div key={manga.mal_id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row">
+                  <div onClick={() =>openMangasPage(manga.mal_id)} key={manga.mal_id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row cursor-pointer">
                     <div className="md:w-1/3 flex-shrink-0">
                       <img
                         src={manga.images?.jpg?.image_url || '/placeholder.svg'}
