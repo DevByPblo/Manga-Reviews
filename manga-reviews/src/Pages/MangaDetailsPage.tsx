@@ -322,7 +322,7 @@ fetchStats();
             </div>
           </div>
 
-          <div className="flex-1 space-y-6">
+          <div className="flex-1 space-y-6 w-[600px]">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold mb-2">{manga.title}</h1>
               <h3 className="text-lg sm:text-xl text-gray-600 mb-2">{manga.title_japanese}</h3>
@@ -518,7 +518,7 @@ fetchStats();
             <div className="space-y-4 " >
               {recentMangaRecommendations.slice(0, 6).map((rec) => (
                 <Link to={`/manga/${rec.mal_id}`} key={rec.mal_id} className="block">
-                  <div className="p-3 hover:scale-105 transition-transform duration-200 bg-white rounded-lg shadow cursor-pointer  blur-xs md:filter-blur hover:md:filter-none">
+                  <div className="p-3 hover:scale-105 transition-transform duration-200 bg-white rounded-lg shadow cursor-pointer  ">
                     <p className="text-sm font-medium text-gray-800 mb-2 line-clamp-2">{rec.title}</p>
                     <img
                       src={rec.coverImage || '/technicalIssues.png'}
