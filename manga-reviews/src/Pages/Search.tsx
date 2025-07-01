@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 
-
 import Navbar from '../components/Navbar';
 import MangaCard from '../components/MangaCard';
 import { useManga } from '../context/MangaContext';
@@ -46,8 +45,8 @@ const SearchPage: React.FC = () => {
   };
 
   const openMangasPage = (mangaId: string | number): void => {
-    navigate(`/manga/${mangaId}`)
-  }
+    navigate(`/manga/${mangaId}`);
+  };
 
   const handleImport = (manga: any) => {
     importOnlineManga(manga);
@@ -63,12 +62,20 @@ const SearchPage: React.FC = () => {
         <div className="flex mb-8 gap-2">
           <button
             onClick={() => setTab('local')}
-            className={`flex-1 py-2 text-center ${tab === 'local' ? 'border-b-2 border-manga-red font-semibold' : 'text-gray-600'}`}
-          >Your Collection</button>
+            className={`flex-1 py-2 text-center ${
+              tab === 'local' ? 'border-b-2 border-manga-red font-semibold' : 'text-gray-600'
+            }`}
+          >
+            Your Collection
+          </button>
           <button
             onClick={() => setTab('online')}
-            className={`flex-1 py-2 text-center ${tab === 'online' ? 'border-b-2 border-manga-red font-semibold' : 'text-gray-600'}`}
-          >Online Search</button>
+            className={`flex-1 py-2 text-center ${
+              tab === 'online' ? 'border-b-2 border-manga-red font-semibold' : 'text-gray-600'
+            }`}
+          >
+            Online Search
+          </button>
         </div>
 
         {/* Local Tab Content */}
@@ -80,13 +87,15 @@ const SearchPage: React.FC = () => {
                 type="text"
                 placeholder="Search your manga collection..."
                 value={localQuery}
-                onChange={e => setLocalQuery(e.target.value)}
+                onChange={(e) => setLocalQuery(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-manga-red"
               />
             </div>
             {localResults.length > 0 ? (
               <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                {localResults.map(m => <MangaCard key={m.id} manga={m} />)}
+                {localResults.map((m) => (
+                  <MangaCard key={m.id} manga={m} />
+                ))}
               </div>
             ) : (
               <div className="text-center py-12">
@@ -107,8 +116,8 @@ const SearchPage: React.FC = () => {
                   type="text"
                   placeholder="Search online for manga..."
                   value={onlineQuery}
-                  onChange={e => setOnlineQuery(e.target.value)}
-                  onKeyDown={e => e.key === 'Enter' && handleOnlineSearch()}
+                  onChange={(e) => setOnlineQuery(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && handleOnlineSearch()}
                   className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-manga-red"
                 />
               </div>
@@ -126,24 +135,38 @@ const SearchPage: React.FC = () => {
               </div>
             ) : onlineResults.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {onlineResults.map(manga => (
-                  <div onClick={() =>openMangasPage(manga.mal_id)} key={manga.mal_id} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row cursor-pointer">
+                {onlineResults.map((manga) => (
+                  <div
+                    onClick={() => openMangasPage(manga.mal_id)}
+                    key={manga.mal_id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col md:flex-row cursor-pointer"
+                  >
                     <div className="md:w-1/3 flex-shrink-0">
                       <img
                         src={manga.images?.jpg?.image_url || '/placeholder.svg'}
                         alt={manga.title}
                         className="w-full h-full object-cover"
-                        onError={e => { (e.target as HTMLImageElement).onerror = null; e.target.src = '/placeholder.svg'; }}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = '/placeholder.svg';
+                        }}
                       />
                     </div>
                     <div className="p-4 flex flex-col flex-1">
                       <h3 className="font-bold text-lg mb-1">{manga.title}</h3>
-                      <p className="text-sm text-gray-600 mb-2">{manga.authors?.map((a: any) => a.name).join(', ') || 'Unknown author'}</p>
-                      <p className="text-sm mb-4 flex-grow line-clamp-3">{manga.synopsis || 'No description available.'}</p>
+                      <p className="text-sm text-gray-600 mb-2">
+                        {manga.authors?.map((a: any) => a.name).join(', ') || 'Unknown author'}
+                      </p>
+                      <p className="text-sm mb-4 flex-grow line-clamp-3">
+                        {manga.synopsis || 'No description available.'}
+                      </p>
                       <button
                         onClick={() => handleImport(manga)}
                         className="mt-auto px-4 py-2 bg-manga-red text-white rounded hover:bg-red-700 transition"
-                      >Add to Collection</button>
+                      >
+                        Add to Collection
+                      </button>
                     </div>
                   </div>
                 ))}

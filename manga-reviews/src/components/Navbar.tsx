@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import CustomButton from './CustomButton';
-import { Plus, Search, Clapperboard, Home } from 'lucide-react';
+import { useState } from 'react';
+import {   Search, Clapperboard, Home } from 'lucide-react';
 import { useManga } from '../context/MangaContext';
 import ToggleButton from './ui/ToggleButton';
 import { Sling as Hamburger } from 'hamburger-react';
@@ -16,7 +15,7 @@ const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
 
   const handleLinkClick = () => {
-    setOpen(false); // Close menu when a link is clicked
+    setOpen(false);  
   };
 
   return (
@@ -49,9 +48,12 @@ const Navbar = () => {
               
               {/* Desktop NSFW Toggle */}
               <div className="ml-4">
-                <ToggleButton checked={nsfwEnabled} onChange={toggleNsfw}>
-                  {nsfwEnabled ? 'Family' : 'NSFW'}
-                </ToggleButton>
+                <ToggleButton
+                  checked={nsfwEnabled}
+                  onChange={toggleNsfw}
+                  labelTrue="Family"
+                  labelFalse="NSFW"
+      />
               </div>
             </div>
           </div>
@@ -91,9 +93,12 @@ const Navbar = () => {
             <div className="px-3 py-2">
               <div className="flex items-center justify-between">
                 <span className="text-gray-700 font-medium">Content Filter:</span>
-                <ToggleButton checked={nsfwEnabled} onChange={toggleNsfw}>
-                  {nsfwEnabled ? 'Family' : 'NSFW'}
-                </ToggleButton>
+                 <ToggleButton
+                  checked={nsfwEnabled}
+                  onChange={toggleNsfw}
+                  labelTrue="Family"
+                  labelFalse="NSFW"
+                />
               </div>
             </div>
           </div>

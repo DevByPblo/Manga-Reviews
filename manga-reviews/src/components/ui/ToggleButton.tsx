@@ -3,11 +3,15 @@ import React from "react";
 interface ToggleButtonProps {
   checked?: boolean;
   onChange?: (checked: boolean) => void;
+  labelTrue?: string;
+  labelFalse?: string;
 }
 
 const ToggleButton: React.FC<ToggleButtonProps> = ({
   checked = false,
   onChange = () => {},
+  labelTrue = 'Family',
+  labelFalse = 'NSFW',
 }) => {
   return (
     <label className="inline-flex items-center cursor-pointer gap-2 scale-90">
@@ -32,8 +36,11 @@ const ToggleButton: React.FC<ToggleButtonProps> = ({
           `}
         ></div>
       </div>
-      <span className={`text-sm font-medium  ${checked ? 'text-blue-600' : 'text-red-600'}` } style={{ minWidth: '50px',   }}>
-        {checked ? 'Family' : 'NSFW'}   
+      <span
+        className={`text-sm font-medium ${checked ? 'text-blue-600' : 'text-red-600'}`}
+        style={{ minWidth: '50px' }}
+      >
+        {checked ? labelTrue : labelFalse}
       </span>
     </label>
   );

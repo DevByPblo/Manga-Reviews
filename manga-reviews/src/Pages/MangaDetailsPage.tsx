@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useManga } from '../context/MangaContext';
-import { ArrowLeft, CombineIcon } from 'lucide-react';
-import RatingStars from '../components/RatingStars';
-import type { Manga, Review } from '../types/manga';
+import { ArrowLeft } from 'lucide-react';
+import type { Manga } from '../types/manga';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
-import ExternalReviews from '../components/ExternalReviews';
+ 
 
-const ReviewCard: React.FC<{ review: Review }> = ({ review }) => (
-  <li className="border p-4 rounded bg-white">
-    <p className="font-medium">{review.username} – {review.rating}/5</p>
-    <p className="text-gray-700">{review.content}</p>
-    <p className="text-xs text-gray-500">{new Date(review.createdAt).toLocaleDateString()}</p>
-  </li>
-);
+// const ReviewCard: React.FC<{ review: Review }> = ({ review }) => (
+//   <li className="border p-4 rounded bg-white">
+//     <p className="font-medium">{review.username} – {review.rating}/5</p>
+//     <p className="text-gray-700">{review.content}</p>
+//     <p className="text-xs text-gray-500">{new Date(review.createdAt).toLocaleDateString()}</p>
+//   </li>
+// );
 
 interface Character {
   mal_id: number;
@@ -38,7 +37,7 @@ interface Recommendation {
 const MangaDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { getManga, addReview, reviews, fetchReviews, recentMangaRecommendations, fetchRecentRecommendations } = useManga();
+  const { getManga, fetchReviews, recentMangaRecommendations, fetchRecentRecommendations } = useManga();
 
   const [manga, setManga] = useState<Manga | null>(null);
   const [characters, setCharacters] = useState<Character[]>([]);
@@ -47,9 +46,9 @@ const MangaDetailsPage: React.FC = () => {
   const [stats,setStats] = useState<any>(null);
   const [similarTo,setSimilarTo] =useState<Recommendation[]>([]);
 
-  const [rating, setRating] = useState(0);
-  const [username, setUsername] = useState('');
-  const [content, setContent] = useState('');
+  // const [rating, setRating] = useState(0);
+  // const [username, setUsername] = useState('');
+  // const [content, setContent] = useState('');
 
   const [activeTab, setActiveTab] = useState<'synopsis' | 'characters' | 'stats' | 'similar'> ('synopsis');
 
@@ -131,10 +130,7 @@ fetchSetSimilarTo()
 fetchStats();
 
 },[id])
-
-// fetch stats
-
-
+ 
   useEffect(() => {
     const load = async () => {
       if (!id) {
@@ -237,22 +233,22 @@ fetchStats();
     fetchCharacters();
   }, [id]);
 
-  const handleSubmitReview = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!manga || rating < 1 || !username.trim() || !content.trim()) return;
+  // const handleSubmitReview = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!manga || rating < 1 || !username.trim() || !content.trim()) return;
 
-    addReview({
-      mangaId: manga.id,
-      userId: 'user-' + Date.now(),
-      username: username.trim(),
-      rating,
-      content: content.trim(),
-    });
+  //   addReview({
+  //     mangaId: manga.id,
+  //     userId: 'user-' + Date.now(),
+  //     username: username.trim(),
+  //     rating,
+  //     content: content.trim(),
+  //   });
 
-    setRating(0);
-    setUsername('');
-    setContent('');
-  };
+  //   setRating(0);
+  //   setUsername('');
+  //   setContent('');
+  // };
 
 
 
@@ -322,7 +318,7 @@ fetchStats();
             </div>
           </div>
 
-          <div className="flex-1 space-y-6 w-[600px]">
+          <div className="flex-1 space-y-6 w-[]">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold mb-2">{manga.title}</h1>
               <h3 className="text-lg sm:text-xl text-gray-600 mb-2">{manga.title_japanese}</h3>

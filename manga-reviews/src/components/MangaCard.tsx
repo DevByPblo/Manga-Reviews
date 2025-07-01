@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Star, ToggleLeft } from 'lucide-react';
+import { Star } from 'lucide-react';
 import type { Manga } from '../types/manga';
 
 interface MangaCardProps {
