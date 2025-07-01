@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Plus, Search } from 'lucide-react';
-
+import AlertBanner from '../components/AlertBanner';
 import MangaCard from '../components/MangaCard';
 import { useManga } from '../context/MangaContext';
 import type { Manga } from '../types/manga';
@@ -89,7 +89,9 @@ const Home: React.FC = () => {
     .slice(0, 5);
 
   return (
+   
     <main className="min-h-screen pt-6 px-2 sm:px-4">
+       <AlertBanner/>
       <div className="max-w-6xl mx-auto space-y-12">
         {/* Header and Search */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">

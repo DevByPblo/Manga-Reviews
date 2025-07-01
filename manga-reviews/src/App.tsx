@@ -11,11 +11,13 @@ import './App.css';
 import Navbar from './components/Navbar';
 import GenreMangaList from './pages/GenreMangaList';
 
+
 export default function App() {
   return (
 
     <main >
       <div className='mb-10'>
+           
 <Navbar />
 
       </div>
